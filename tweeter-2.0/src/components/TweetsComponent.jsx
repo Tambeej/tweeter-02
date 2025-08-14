@@ -1,27 +1,4 @@
-import { useEffect, useState } from "react";
-import { fetchTweets, createTweet } from "../tweetsService";
-
-export default function TweetsComponent() {
-  const [tweets, setTweets] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    async function loadTweets() {
-      setLoading(true);
-      setError("");
-      try {
-        const data = await fetchTweets();
-        setTweets(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadTweets();
-  }, []);
-
+export default function TweetsComponent({ tweets, loading, error }) {
   return (
     <div>
       <h2>Tweets</h2>
