@@ -1,10 +1,7 @@
-import { useEffect, useState } from "react";
-// import { fetchTweets, createTweet } from "../tweetsService";
+import { useState } from "react";
 import { MantineProvider, Button, Textarea } from "@mantine/core";
 
-export default function AddTweetComponenet({ onAddTweet }) {
-  //   const [tweets, setTweets] = useState([]);
-  //   const [adding, setAdding] = useState(false);
+export default function AddTweetComponenet({ onAddTweet, userName }) {
   const [newTweet, setNewTweet] = useState("");
   const [error, setError] = useState("");
 
@@ -36,7 +33,7 @@ export default function AddTweetComponenet({ onAddTweet }) {
               onClick={() => {
                 onAddTweet({
                   content: newTweet,
-                  userName: "Queen B",
+                  userName: userName,
                   date: new Date().toISOString(),
                 });
                 setNewTweet("");
