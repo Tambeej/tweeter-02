@@ -32,7 +32,6 @@ export default function Home({ userName }) {
   }
   return (
     <div>
-      <Navbar />
       <h2>Welcome, {userName}!</h2>
       <AddTweetComponenet onAddTweet={handleAddTweet} userName={userName} />
       <TweetsComponent tweets={tweets} loading={loading} error={error} />

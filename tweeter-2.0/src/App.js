@@ -13,6 +13,7 @@ import {
   MantineProvider,
 } from "@mantine/core";
 import ProfilePage from "./components/ProfilePage.jsx";
+import Navbar from "./components/Navbar.jsx";
 
 export default function App() {
   const [tweets, setTweets] = useState([]);
@@ -85,6 +86,7 @@ export default function App() {
   return (
     <MantineProvider>
       <Router>
+        <Navbar />
         <AppShell
           padding="md"
           header={

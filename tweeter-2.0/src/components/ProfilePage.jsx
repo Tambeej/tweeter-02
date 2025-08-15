@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { TextInput, Button, Stack } from "@mantine/core";
-import Navbar from "./Navbar";
 
 export default function ProfilePage({ username, setUsername }) {
   const [newName, setNewName] = useState(username);
@@ -12,7 +11,6 @@ export default function ProfilePage({ username, setUsername }) {
 
   return (
     <Stack>
-      <Navbar />
       <h2>Profile</h2>
       <TextInput
         label="Username"
