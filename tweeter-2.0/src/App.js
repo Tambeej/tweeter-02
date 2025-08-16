@@ -1,6 +1,4 @@
 import "./App.css";
-import TweetsComponent from "./components/TweetsComponent.jsx";
-import AddTweetComponenet from "./components/AddTweetComponent.jsx";
 import Home from "./components/Home.jsx";
 import { useState, useEffect } from "react";
 import { fetchTweets, createTweet } from "./tweetsService";
@@ -14,6 +12,7 @@ import {
 } from "@mantine/core";
 import ProfilePage from "./components/ProfilePage.jsx";
 import Navbar from "./components/Navbar.jsx";
+import { TweetsProvider } from "./context/TweetsContext.jsx";
 
 export default function App() {
   const [tweets, setTweets] = useState([]);
@@ -51,10 +50,6 @@ export default function App() {
     loadTweets();
   }, []);
 
-  async function handleAddTweet(tweetObj) {
-    const created = await createTweet(tweetObj);
-    setTweets((prev) => [created[0], ...prev]);
-  }
 
   useEffect(() => {
     try {
@@ -87,39 +82,44 @@ export default function App() {
     <MantineProvider>
       <Router>
         <Navbar />
-        <AppShell
-          padding="md"
-          header={
-            <Group
-              justify="space-between"
-              align="center"
-              style={{ height: "100%" }}
-            >
-              <Group>
-                <Anchor component={Link} to="/">
-                  Home
-                </Anchor>
-                <Anchor component={Link} to="/profile">
-                  Profile
-                </Anchor>
+        <TweetsProvider>
+          <AppShell
+            padding="md"
+            header={
+              <Group
+                justify="space-between"
+                align="center"
+                style={{ height: "100%" }}
+              >
+                <Group>
+                  <Anchor component={Link} to="/">
+                    Home
+                  </Anchor>
+                  <Anchor component={Link} to="/profile">
+                    Profile
+                  </Anchor>
+                </Group>
+                <strong>{username}</strong>
               </Group>
-              <strong>{username}</strong>
-            </Group>
-          }
-        >
-          <Container>
-            <Routes>
-              <Route path="/" element={<Home userName={username} />} />
+            }
+          >
+            <Container>
+              <Routes>
+                <Route path="/" element={<Home userName={username} />} />
 
-              <Route
-                path="/profile"
-                element={
-                  <ProfilePage username={username} setUsername={setUsername} />
-                }
-              />
-            </Routes>
-          </Container>
-        </AppShell>
+                <Route
+                  path="/profile"
+                  element={
+                    <ProfilePage
+                      username={username}
+                      setUsername={setUsername}
+                    />
+                  }
+                />
+              </Routes>
+            </Container>
+          </AppShell>
+        </TweetsProvider>
       </Router>
     </MantineProvider>
   );

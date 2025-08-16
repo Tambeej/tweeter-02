@@ -4,11 +4,11 @@ import TweetsComponent from "./TweetsComponent";
 import Navbar from "./Navbar";
 import { useState, useEffect } from "react";
 import { fetchTweets, createTweet } from "../tweetsService";
+import { useTweets } from "../context/TweetsContext.jsx";
 
 export default function Home({ userName }) {
-  const [tweets, setTweets] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const { tweets, setTweets, loading, setLoading, error, setError, addTweet } =
+    useTweets();
 
   useEffect(() => {
     async function loadTweets() {
